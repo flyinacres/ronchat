@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to FirebaseRTC</title>
+    <title>Ron Chat</title>
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -14,11 +14,18 @@
     <script defer src="/__/firebase/7.13.1/firebase-firestore.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
+ 
+    <script  defer src="/something.js" type="text/javascript" ></script>
+    <script  defer src="/webgazer.js" type="text/javascript" ></script>
 
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
-<h1>Welcome to FirebaseRTC!</h1>
+<h1>Welcome to Ron Chat!</h1>
+<div id="videos" >
+    <video id="localVideo" muted autoplay playsinline height=240 width=320></video>
+    <video id="remoteVideo" autoplay playsinline height=240 width=320></video>
+</div>
 <div id="buttons">
     <button class="mdc-button mdc-button--raised" id="cameraBtn">
         <i class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
@@ -40,10 +47,7 @@
 <div>
     <span id="currentRoom"></span>
 </div>
-<div id="videos">
-    <video id="localVideo" muted autoplay playsinline></video>
-    <video id="remoteVideo" autoplay playsinline></video>
-</div>
+
 <div class="mdc-dialog"
      id="room-dialog"
      role="alertdialog"
