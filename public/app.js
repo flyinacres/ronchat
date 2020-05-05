@@ -252,6 +252,8 @@ async function openUserMedia(e) {
 
   var oldX = -1, oldY = -1
   var leftCount = 0, rightCount = 0
+  var last60 = 0
+  var theCount = 0
 
   webgazer.setGazeListener(function (data, elapsedTime) {
     if (data == null) {
@@ -262,15 +264,26 @@ async function openUserMedia(e) {
 
     var message = ""
     if (oldX > xprediction) {
-      message = "further right"
-      rightCount++
-      leftCount = 0
-    } else {
-      message = "further left"
-      leftCount++
+      message = "left: " + leftCount
       rightCount = 0
+      leftCount++
+      theCount++
+      last60--
+    } else if (oldX < xprediction) {
+      message = "right: " + rightCount
+      leftCount = 0
+      rightCount++
+      theCount++
+      last60++
     }
     oldX = xprediction
+
+    // Experiment to see if there are trends...
+    if (theCount == 60) {
+      console.log("Last 60 is: " + last60)
+      last60 = 0
+      theCount = 0
+    }
 
     if (rightCount > 10) {
       let feedbackElement = document.querySelector('#webgazerFaceFeedbackBox')
@@ -279,6 +292,7 @@ async function openUserMedia(e) {
       feedbackElement.style.borderLeft = feedbackElement.style.border
       message = "long right"
       console.log(message)
+      rightCount = 0
     } else if (leftCount > 10) {
       let feedbackElement = document.querySelector('#webgazerFaceFeedbackBox')
 
@@ -286,6 +300,7 @@ async function openUserMedia(e) {
       feedbackElement.style.borderRight = feedbackElement.style.border
       message = "long left"
       console.log(message)
+      leftCount = 0
     }
 
 
