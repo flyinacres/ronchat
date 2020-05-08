@@ -230,6 +230,7 @@ async function joinRoomById(roomId) {
 // Note that localStream and remoteStream are used elsewhere, so this code 
 // must be called (and succeed) before the app can work successfully.
 async function openUserMedia(e) {
+
   // Ref for getUsermedia: 
   // https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
   const stream = await navigator.mediaDevices.getUserMedia(
@@ -281,6 +282,9 @@ async function openUserMedia(e) {
     // Experiment to see if there are trends...
     if (theCount == 60) {
       console.log("Last 60 is: " + last60)
+
+      panDelta(last60/60)
+      
       last60 = 0
       theCount = 0
     }

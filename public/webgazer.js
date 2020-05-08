@@ -9863,8 +9863,14 @@ var mosseFilterResponses = function() {
             }
             weightedXArray[trueIndex] = this.screenXClicksArray.get(i).slice(0, this.screenXClicksArray.get(i).length);
             weightedYArray[trueIndex] = this.screenYClicksArray.get(i).slice(0, this.screenYClicksArray.get(i).length);
-            weightedXArray[i][0] = weightedXArray[i][0] * weight;
-            weightedYArray[i][0] = weightedYArray[i][0] * weight;
+            // rff index values < trueindex sometimes do not have any values assigned to them...  
+            // Seems like a bug in the original code, so I switched the use of 'i' to 'trueIndex' here
+            if (!weightedXArray[trueIndex]) {
+              console.log("Error: No entries for weightedXArray[" + trueIndex + "], len = " + len + ", trueIndex = " + trueIndex)
+            } else {
+              weightedXArray[trueIndex][0] = weightedXArray[trueIndex][0] * weight;
+              weightedYArray[trueIndex][0] = weightedYArray[trueIndex][0] * weight;
+            }
         }
 
         var screenXArray = weightedXArray.concat(trailX);
@@ -10491,7 +10497,9 @@ function store_points(x, y, k) {
     // rff This is where I can change defaults. 
     // Note that first attempt to change them often caused code crashes :(
     var curTracker = new webgazer.tracker.ClmGaze();
-    var regs = [new webgazer.reg.RidgeWeightedReg()];
+    // rff found a bug in RidgeWeighted, I believe.  And it seemed to be tracking the exact opposite in x/y (at least the gazerDot)
+    // so trying Ridge now...
+    var regs = [new webgazer.reg.RidgeReg()];
     var blinkDetector = new webgazer.BlinkDetector();
 
     //lookup tables
