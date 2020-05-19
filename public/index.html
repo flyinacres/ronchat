@@ -24,6 +24,9 @@
 </head>
 <body>
 <h1>Welcome to Ron Chat!</h1>
+<div>
+    <h3 id="currentRoom"></h3>
+</div>
 <div id="videos" >
     <video id="localVideo" muted autoplay playsinline height=240 width=320></video>
     <video id="remoteVideo" autoplay playsinline height=240 width=320></video>
@@ -46,9 +49,7 @@
         <span class="mdc-button__label">Hangup</span>
     </button>
 </div>
-<div>
-    <span id="currentRoom"></span>
-</div>
+
 <div>
 
 <audio controls>
@@ -64,13 +65,13 @@
 
 <div class="mdc-dialog"
     id="room-dialog"
-    role="alertdialog"
     aria-modal="true"
     aria-labelledby="my-dialog-title"
     aria-describedby="my-dialog-content">
     <div class="mdc-dialog__container">
-        <div class="mdc-dialog__surface">
-            <h2 class="mdc-dialog__title" id="my-dialog-title">Join room</h2>
+        <div class="mdc-dialog__surface"
+            role="alertdialog">
+            <h2 class="mdc-dialog__title" id="my-dialog-title">Join Room</h2>
             <div class="mdc-dialog__content" id="room-not-found">The specified room could not be found.</div>
             <div class="mdc-dialog__content" id="my-dialog-content">
                 Enter name for the room you want to join:
@@ -122,6 +123,27 @@
     </div>
     <div class="mdc-dialog__scrim"></div>
 </div>
+
+<div class="mdc-dialog"
+    id="room-issue-dialog"
+    role="alertdialog"
+    aria-modal="true"
+    aria-labelledby="my-dialog-title"
+    aria-describedby="my-dialog-content">
+    <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface">
+            <h2 class="mdc-dialog__title" id="my-dialog-title">Connection Issue</h2>
+            <div class="mdc-dialog__content" id="room-issue-text">Errp.  Supposed to be a custom message here...</div>
+            <footer class="mdc-dialog__actions">
+                <button id="roomIssueBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                    <span class="mdc-button__label">OK</span>
+                </button>
+            </footer>
+        </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+</div>
+
 <script src="app.js"></script>
 </body>
 </html>
