@@ -39,3 +39,8 @@ I'd need to know more to know if it is possible to reconnect to the same room.  
 
 Note that the code attempts to delete the room, but they clearly exist in the DB still, so that's
 not working anyway.
+
+
+Review some of the web pages I have to see better ways to handle error situations
+ - Still can't get webcam to connect back on iphone :(
+ = try this on my mac on safari...

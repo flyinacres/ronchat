@@ -22,128 +22,189 @@
 
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
+
 <body>
-<h1>Welcome to Ron Chat!</h1>
-<div>
-    <h3 id="currentRoom"></h3>
-</div>
-<div id="videos" >
-    <video id="localVideo" muted autoplay playsinline height=240 width=320></video>
-    <video id="remoteVideo" autoplay playsinline height=240 width=320></video>
-</div>
-<div id="buttons">
-    <button class="mdc-button mdc-button--raised" id="cameraBtn">
-        <i class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
-        <span class="mdc-button__label">Open camera & microphone</span>
-    </button>
-    <button class="mdc-button mdc-button--raised" disabled id="createBtn">
-        <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
-        <span class="mdc-button__label">Create room</span>
-    </button>
-    <button class="mdc-button mdc-button--raised" disabled id="joinBtn">
-        <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
-        <span class="mdc-button__label">Join room</span>
-    </button>
-    <button class="mdc-button mdc-button--raised" disabled id="hangupBtn">
-        <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
-        <span class="mdc-button__label">Hangup</span>
-    </button>
-</div>
+    <h1>Welcome to Ron Chat!</h1>
 
-<div>
+    <div>
+        <h3 id="currentRoom"></h3>
+    </div>
 
-<audio controls>
-    <source src="viper.ogg" type="audio/ogg">
-    <source src="viper.mp3" type="audio/mp3">
-    <p>Browser too old to support HTML5 audio? How depressing!</p>
-  </audio>
-  <h2>Set stereo panning</h2>
-  <input class="panning-control" type="range" min="-1" max="1" step="0.1" value="0">
-  <span class="panning-value">0</span>
-  <pre></pre>
-</div>
+    <div id="videos" >
+        <video id="localVideo" muted autoplay playsinline height=240 width=320></video>
+        <video id="remoteVideo" autoplay playsinline height=240 width=320></video>
+    </div>
 
-<div class="mdc-dialog"
-    id="room-dialog"
-    aria-modal="true"
-    aria-labelledby="my-dialog-title"
-    aria-describedby="my-dialog-content">
-    <div class="mdc-dialog__container">
-        <div class="mdc-dialog__surface"
-            role="alertdialog">
-            <h2 class="mdc-dialog__title" id="my-dialog-title">Join Room</h2>
-            <div class="mdc-dialog__content" id="room-not-found">The specified room could not be found.</div>
-            <div class="mdc-dialog__content" id="my-dialog-content">
-                Enter name for the room you want to join:
-                <div class="mdc-text-field">
-                    <input type="text" id="join-room-name" class="mdc-text-field__input">
-                    <div class="mdc-line-ripple"></div>
-                </div>
+    <div id="buttons">
+        <button class="mdc-button mdc-button--raised" id="cameraBtn">
+            <i class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
+            <span class="mdc-button__label">Open camera & microphone</span>
+        </button>
+        <button class="mdc-button mdc-button--raised" disabled id="createBtn">
+            <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
+            <span class="mdc-button__label">Create room</span>
+        </button>
+        <button class="mdc-button mdc-button--raised" disabled id="joinBtn">
+            <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
+            <span class="mdc-button__label">Join room</span>
+        </button>
+        <button class="mdc-button mdc-button--raised" disabled id="hangupBtn">
+            <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
+            <span class="mdc-button__label">Hangup</span>
+        </button>
+    </div>
+
+    <div class="mdc-form-field">
+        <div class="mdc-checkbox">
+            <input type="checkbox"
+                class="mdc-checkbox__native-control"
+                id="eye-tracking-choice"/>
+            <div class="mdc-checkbox__background">
+                <svg class="mdc-checkbox__checkmark"
+                    viewBox="0 0 24 24">
+                    <path class="mdc-checkbox__checkmark-path"
+                            fill="none"
+                            d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                </svg>
+                <div class="mdc-checkbox__mixedmark"></div>
             </div>
-            <footer class="mdc-dialog__actions">
-                <button id="cancelJoinBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
-                    <span class="mdc-button__label">Cancel</span>
-                </button>
-                <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button"
-                        data-mdc-dialog-action="yes">
-                    <span class="mdc-button__label">Join</span>
-                </button>
-            </footer>
+            <div class="mdc-checkbox__ripple"></div>
         </div>
-    </div>
-    <div class="mdc-dialog__scrim"></div>
-</div>
+        <label for="eye-tracking-choice">Eye Tracking</label>
 
-<div class="mdc-dialog"
-    id="room-name-dialog"
-    role="alertdialog"
-    aria-modal="true"
-    aria-labelledby="my-dialog-title"
-    aria-describedby="my-dialog-content">
-    <div class="mdc-dialog__container">
-        <div class="mdc-dialog__surface">
-            <h2 class="mdc-dialog__title" id="my-dialog-title">Room Name</h2>
-            <div class="mdc-dialog__content" id="my-dialog-content">
-                Enter the name for the room you want to create:
-                <div class="mdc-text-field">
-                    <input type="text" id="room-name" class="mdc-text-field__input">
-                    <div class="mdc-line-ripple"></div>
-                </div>
+        <div class="mdc-checkbox">
+            <input type="checkbox"
+                class="mdc-checkbox__native-control"
+                id="connection-status-choice"/>
+            <div class="mdc-checkbox__background">
+                <svg class="mdc-checkbox__checkmark"
+                    viewBox="0 0 24 24">
+                    <path class="mdc-checkbox__checkmark-path"
+                            fill="none"
+                            d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                </svg>
+                <div class="mdc-checkbox__mixedmark"></div>
             </div>
-            <footer class="mdc-dialog__actions">
-                <button id="cancelNameBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
-                    <span class="mdc-button__label">Cancel</span>
-                </button>
-                <button id="confirmNameBtn" type="button" class="mdc-button mdc-dialog__button"
-                        data-mdc-dialog-action="yes">
-                    <span class="mdc-button__label">Create</span>
-                </button>
-            </footer>
+            <div class="mdc-checkbox__ripple"></div>
         </div>
-    </div>
-    <div class="mdc-dialog__scrim"></div>
-</div>
+        <label for="connection-status-choice">Connection Status</label>
 
-<div class="mdc-dialog"
-    id="room-issue-dialog"
-    role="alertdialog"
-    aria-modal="true"
-    aria-labelledby="my-dialog-title"
-    aria-describedby="my-dialog-content">
-    <div class="mdc-dialog__container">
-        <div class="mdc-dialog__surface">
-            <h2 class="mdc-dialog__title" id="my-dialog-title">Connection Issue</h2>
-            <div class="mdc-dialog__content" id="room-issue-text">Errp.  Supposed to be a custom message here...</div>
-            <footer class="mdc-dialog__actions">
-                <button id="roomIssueBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
-                    <span class="mdc-button__label">OK</span>
-                </button>
-            </footer>
+        <div class="mdc-checkbox">
+            <input type="checkbox"
+                class="mdc-checkbox__native-control"
+                id="audio-controls-choice"/>
+            <div class="mdc-checkbox__background">
+                <svg class="mdc-checkbox__checkmark"
+                    viewBox="0 0 24 24">
+                    <path class="mdc-checkbox__checkmark-path"
+                            fill="none"
+                            d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                </svg>
+                <div class="mdc-checkbox__mixedmark"></div>
+            </div>
+            <div class="mdc-checkbox__ripple"></div>
         </div>
+        <label for="audio-controls-choice">Audio Controls</label>
     </div>
-    <div class="mdc-dialog__scrim"></div>
-</div>
 
-<script src="app.js"></script>
+    <div id="status-display" style="display:none">
+        <h3>Connection Status Information</h3>
+        <textarea id="status-text" style="height:90px; width:600px"></textarea>
+    </div>
+
+    <div id="audio-controls" style="display:none">
+        <audio controls>
+            <source src="viper.ogg" type="audio/ogg">
+            <source src="viper.mp3" type="audio/mp3">
+            <p>Browser too old to support HTML5 audio? How depressing!</p>
+        </audio>
+        <h2>Set stereo panning</h2>
+        <input class="panning-control" type="range" min="-1" max="1" step="0.1" value="0">
+        <span class="panning-value">0</span>
+        <pre></pre>
+    </div>
+
+    <div class="mdc-dialog"
+        id="room-dialog"
+        aria-modal="true"
+        aria-labelledby="my-dialog-title"
+        aria-describedby="my-dialog-content">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface"
+                role="alertdialog">
+                <h2 class="mdc-dialog__title" id="my-dialog-title">Join Room</h2>
+                <div class="mdc-dialog__content" id="room-not-found">The specified room could not be found.</div>
+                <div class="mdc-dialog__content" id="my-dialog-content">
+                    Enter name for the room you want to join:
+                    <div class="mdc-text-field">
+                        <input type="text" id="join-room-name" class="mdc-text-field__input">
+                        <div class="mdc-line-ripple"></div>
+                    </div>
+                </div>
+                <footer class="mdc-dialog__actions">
+                    <button id="cancelJoinBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                        <span class="mdc-button__label">Cancel</span>
+                    </button>
+                    <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button"
+                            data-mdc-dialog-action="yes">
+                        <span class="mdc-button__label">Join</span>
+                    </button>
+                </footer>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+
+    <div class="mdc-dialog"
+        id="room-name-dialog"
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="my-dialog-title"
+        aria-describedby="my-dialog-content">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface">
+                <h2 class="mdc-dialog__title" id="my-dialog-title">Room Name</h2>
+                <div class="mdc-dialog__content" id="my-dialog-content">
+                    Enter the name for the room you want to create:
+                    <div class="mdc-text-field">
+                        <input type="text" id="room-name" class="mdc-text-field__input">
+                        <div class="mdc-line-ripple"></div>
+                    </div>
+                </div>
+                <footer class="mdc-dialog__actions">
+                    <button id="cancelNameBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                        <span class="mdc-button__label">Cancel</span>
+                    </button>
+                    <button id="confirmNameBtn" type="button" class="mdc-button mdc-dialog__button"
+                            data-mdc-dialog-action="yes">
+                        <span class="mdc-button__label">Create</span>
+                    </button>
+                </footer>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+
+    <div class="mdc-dialog"
+        id="room-issue-dialog"
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="my-dialog-title"
+        aria-describedby="my-dialog-content">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface">
+                <h2 class="mdc-dialog__title" id="my-dialog-title">Connection Issue</h2>
+                <div class="mdc-dialog__content" id="room-issue-text">Errp.  Supposed to be a custom message here...</div>
+                <footer class="mdc-dialog__actions">
+                    <button id="roomIssueBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                        <span class="mdc-button__label">OK</span>
+                    </button>
+                </footer>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>

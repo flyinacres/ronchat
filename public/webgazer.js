@@ -9640,10 +9640,14 @@ var mosseFilterResponses = function() {
      * @param {Array.<Object>} data - The data to set
      */
     webgazer.reg.RidgeReg.prototype.setData = function(data) {
+      // rff This loop was sometimes failing with:
+      // Uncaught DOMException: Failed to construct 'ImageData': The input data has zero elements.
+      // at webgazer.reg.RidgeReg.setData (http://localhost:5000/webgazer.js:9645:39)
+      // Note that my 'fix' only moved the error...
         for (var i = 0; i < data.length; i++) {
             //TODO this is a kludge, needs to be fixed
-            data[i].eyes.left.patch = new ImageData(new Uint8ClampedArray(data[i].eyes.left.patch), data[i].eyes.left.width, data[i].eyes.left.height);
-            data[i].eyes.right.patch = new ImageData(new Uint8ClampedArray(data[i].eyes.right.patch), data[i].eyes.right.width, data[i].eyes.right.height);
+            data[i].eyes.left.patch = new ImageData(new Uint8ClampedArray(Object.values(data[i].eyes.left.patch)), data[i].eyes.left.width, data[i].eyes.left.height);
+            data[i].eyes.right.patch = new ImageData(new Uint8ClampedArray(Object.values(data[i].eyes.right.patch)), data[i].eyes.right.width, data[i].eyes.right.height);
             this.addData(data[i].eyes, data[i].screenPos, data[i].type);
         }
     };
