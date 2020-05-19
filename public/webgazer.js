@@ -9609,6 +9609,8 @@ var mosseFilterResponses = function() {
         var screenXArray = this.screenXClicksArray.data.concat(trailX);
         var screenYArray = this.screenYClicksArray.data.concat(trailY);
         var eyeFeatures = this.eyeFeaturesClicks.data.concat(trailFeat);
+        // rff Is the data adding up as I train this?
+        //console.log("training data len: " + screenXArray.length)
 
         var coefficientsX = ridge(screenXArray, eyeFeatures, ridgeParameter);
         var coefficientsY = ridge(screenYArray, eyeFeatures, ridgeParameter);
@@ -10759,6 +10761,7 @@ function store_points(x, y, k) {
                 }
                 var pred = webgazer.util.bound({'x':x/len, 'y':y/len});
 
+                 // rff this code, like so much of this mediochre demo code, is broken...
                 if (store_points_var) {
                     drawCoordinates('blue',pred.x,pred.y); //draws the previous predictions
                     //store the position of the past fifty occuring tracker preditions
@@ -10803,6 +10806,7 @@ function store_points(x, y, k) {
      * @param {Event} event - The listened event
      */
     var clickListener = function(event) {
+        // rff - really emphasize this in an attempt to help with training
         recordScreenPosition(event.clientX, event.clientY, eventTypes[0]); // eventType[0] === 'click'
         recordScreenPosition(event.clientX, event.clientY, eventTypes[0]); // eventType[0] === 'click'
         recordScreenPosition(event.clientX, event.clientY, eventTypes[0]); // eventType[0] === 'click'

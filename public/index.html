@@ -63,29 +63,59 @@
 </div>
 
 <div class="mdc-dialog"
-     id="room-dialog"
-     role="alertdialog"
-     aria-modal="true"
-     aria-labelledby="my-dialog-title"
-     aria-describedby="my-dialog-content">
+    id="room-dialog"
+    role="alertdialog"
+    aria-modal="true"
+    aria-labelledby="my-dialog-title"
+    aria-describedby="my-dialog-content">
     <div class="mdc-dialog__container">
         <div class="mdc-dialog__surface">
             <h2 class="mdc-dialog__title" id="my-dialog-title">Join room</h2>
+            <div class="mdc-dialog__content" id="room-not-found">The specified room could not be found.</div>
             <div class="mdc-dialog__content" id="my-dialog-content">
-                Enter ID for room to join:
+                Enter name for the room you want to join:
                 <div class="mdc-text-field">
-                    <input type="text" id="room-id" class="mdc-text-field__input">
-                    <label class="mdc-floating-label" for="my-text-field">Room ID</label>
+                    <input type="text" id="join-room-name" class="mdc-text-field__input">
                     <div class="mdc-line-ripple"></div>
                 </div>
             </div>
             <footer class="mdc-dialog__actions">
-                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                <button id="cancelJoinBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
                     <span class="mdc-button__label">Cancel</span>
                 </button>
                 <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button"
                         data-mdc-dialog-action="yes">
                     <span class="mdc-button__label">Join</span>
+                </button>
+            </footer>
+        </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+</div>
+
+<div class="mdc-dialog"
+    id="room-name-dialog"
+    role="alertdialog"
+    aria-modal="true"
+    aria-labelledby="my-dialog-title"
+    aria-describedby="my-dialog-content">
+    <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface">
+            <h2 class="mdc-dialog__title" id="my-dialog-title">Room Name</h2>
+            <div class="mdc-dialog__content" id="my-dialog-content">
+                Enter the name for the room you want to create:
+                <div class="mdc-text-field">
+                    <input type="text" id="room-name" class="mdc-text-field__input">
+                    <div class="mdc-line-ripple"></div>
+                </div>
+            </div>
+            <footer class="mdc-dialog__actions">
+                <button id="cancelNameBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                    <span class="mdc-button__label">Cancel</span>
+                </button>
+                <button id="confirmNameBtn" type="button" class="mdc-button mdc-dialog__button"
+                        data-mdc-dialog-action="yes">
+                    <span class="mdc-button__label">Create</span>
                 </button>
             </footer>
         </div>

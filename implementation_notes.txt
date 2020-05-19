@@ -1,0 +1,41 @@
+I am using RidgeReg as the regression model.
+
+
+getEyeFeats(): 9491
+
+Normalize the eye features.  I think there are something like 70 features coming from the CLM model.
+
+addData(): 9557
+
+There are separate arrays for clicks and for mouse movement (trails).  
+Each is currently limited to a 'data window' of the last 700 items.
+
+predict(): 9593
+
+
+
+Thoughts
+
+I don't know how well the CLM model, which I believe is providing the basic eye features, works.
+The feedback image (face outline) can jump around quite a bit while looking fairly still/closely at a single point on the screen.
+I've tested the system where I hold my head still and make small movements. This can keep the feedback steady, but still does not result in reliable preditions.
+
+
+I think there are something like 70 eye features in the CLM model. Is that useful or noise? 
+I'd like to be able to test with synthetic eye features to see how well regression works.
+I'd like to be able to test the real data to see if any of the 70 features are extraneous.
+
+
+The regression data window of 700 items means that any training not inside that window (older training) is lost/forgotten.  This can't be right.
+
+
+Can I somehow compare the click position going in to the position coming out? They might not even be in the same coordinate system.
+
+
+Hangup Functionality
+All tracks are stopped and the room is deleted when either side hangs up.  Why?  
+
+I'd need to know more to know if it is possible to reconnect to the same room.  Investigate.
+
+Note that the code attempts to delete the room, but they clearly exist in the DB still, so that's
+not working anyway.
