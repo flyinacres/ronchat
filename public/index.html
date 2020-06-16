@@ -35,6 +35,15 @@
         <video id="remoteVideo" autoplay playsinline height=240 width=320></video>
     </div>
 
+    <div id="chat" >
+        <textarea id="chat-text" style="height:90px; width:600px"></textarea>
+        <textarea id="chat-entry" style="height:45px; width:600px" placeholder="Enter chat, then hit send..."></textarea>
+        <button class="mdc-button mdc-button--raised" disabled id="sendBtn">
+            <i class="material-icons mdc-button__icon" aria-hidden="true">send</i>
+            <span class="mdc-button__label">Send</span>
+        </button>
+    </div>
+
     <div id="buttons">
         <button class="mdc-button mdc-button--raised" id="cameraBtn">
             <i class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
